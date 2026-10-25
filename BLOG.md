@@ -158,4 +158,5 @@ On the night the story page replays, the sloth worked through 20 screenshots in 
 
 ## Prize Categories
 
+- **Best Use of Gemma**: Gemma 3 1B, running locally in Ollama on a laptop with no graphics card, names and files every screenshot through structured JSON output, and a grounding check makes it prove each name with words that are really on the screenshot before the name is kept.
 - **Best Use of Temporal**: the whole agent is a durable Temporal workflow that survives hard worker kills mid-model-call (heartbeats), retries a flaky local model (retry policies and `next_retry_delay`), and gives a lazy person signals, validated updates, durable timers, a saga undo, continue-as-new and a nightly Schedule, with replay tests built from real recorded histories.
