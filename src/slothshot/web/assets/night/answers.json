@@ -1,0 +1,24 @@
+{
+  "source": "worker logs of run slothshot-screenshots-20261025-201342 (gemma3:1b); every weak answer in order, then the name it kept",
+  "answers": {
+    "Screenshot 2026-10-18 091205.png": ["=>billing-error"],
+    "Screenshot 2026-10-18 172512.png": ["order", "order", "food", "Order Details", "shopping"],
+    "Screenshot 2026-10-19 033819.png": ["flight", "flight", "flight", "flight booking", "flight"],
+    "Screenshot 2026-10-19 105126.png": ["travel", "travel", "=>weekend-trek"],
+    "Screenshot 2026-10-19 150433.png": ["chat", "=>network-password"],
+    "Screenshot 2026-10-19 211740.png": ["recipe", "=>banana-bread-recipe"],
+    "Screenshot 2026-10-20 053047.png": ["hooks", "hooks", "=>hooks-useretry-ts"],
+    "Screenshot 2026-10-20 154354.png": ["npm", "=>npm-errors-and-peer-dependencies"],
+    "Screenshot 2026-10-20 225701.png": ["=>q4-planning-offline-mode-action-items-sync"],
+    "Screenshot 2026-10-21 031008.png": ["cart", "cart", "cart", "cart", "cart"],
+    "Screenshot 2026-10-21 092315.png": ["social media posts", "chat", "chat", "social", "=>hot-take"],
+    "Screenshot 2026-10-21 173622.png": ["=>dentist-dr-shah"],
+    "Screenshot 2026-10-22 034929.png": ["=>field-notes"],
+    "Screenshot 2026-10-22 110236.png": ["payments", "payments", "Payment confirmation", "payment_receipt"],
+    "Screenshot 2026-10-22 151543.png": ["parcel", "delivery", "parcel", "parcel", "=>parcel-delivery"],
+    "Screenshot 2026-10-22 212850.png": ["Pune weather report", "Pune", "Pune weather", "Pune weather forecast"],
+    "Screenshot 2026-10-23 054157.png": ["=>fix-race-in-retry-loop-212"],
+    "Screenshot 2026-10-23 155504.png": ["taken-2026-10-23", "taken-2026-10-23", "Taken 2026-10-23.", "taken photos"],
+    "Screenshot 2026-10-23 230811.png": ["invoice", "invoice", "invoice", "invoice"]
+  }
+}

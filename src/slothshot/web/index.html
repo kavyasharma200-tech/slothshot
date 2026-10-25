@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slothshot</title>
+<meta name="description" content="A sloth that names your screenshots overnight, on your own laptop, with a small open model inside a Temporal workflow that survives crashes.">
+<meta property="og:title" content="Slothshot: your screenshots, named by morning">
+<meta property="og:description" content="Gemma 3 1B and RapidOCR on your laptop, made durable with Temporal. Kill it halfway and it carries on from the same screenshot.">
+<meta property="og:image" content="https://kavyasharma200-tech.github.io/slothshot/assets/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#16200f">
+<link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+<script>
+  // Decide the intro before first paint: long on a first visit, short on a repeat, none for reduced motion.
+  (function () {
+    var d = document.documentElement, mode = "none";
+    d.classList.add("js");
+    try {
+      var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var shot = /[?&]shot=/.test(location.search);
+      if (!reduce && !shot) mode = sessionStorage.getItem("slothshot-intro") ? "short" : "long";
+    } catch (e) { mode = "none"; }
+    d.dataset.intro = mode;
+    setTimeout(function () { d.classList.add("motion-fallback"); }, 6000);
+  })();
+</script>
+<link rel="stylesheet" href="assets/tokens.css?v=1.0.0">
+<link rel="stylesheet" href="assets/site.css?v=1.0.0">
+</head>
+<body>
+
+<div class="intro" aria-hidden="true">
+  <svg class="intro__art" viewBox="0 0 560 240">
+    <path class="intro__branch" pathLength="1" d="M0 70 C 120 58, 220 82, 330 66 S 480 54, 560 72" fill="none" stroke="var(--bark-500)" stroke-width="10" stroke-linecap="round"/>
+    <g class="intro__sloth" transform="translate(205 56) scale(.75)" opacity="0"></g>
+  </svg>
+  <div class="intro__caption"><span class="i1"></span><span class="i2">Awake.</span></div>
+</div>
+
+<header class="chrome" data-tone="dark">
+  <a class="mark" href="#top" aria-label="Slothshot, back to the top">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><use href="#i-mark"/></svg><span>slothshot</span>
+  </a>
+  <nav>
+    <a class="link" href="#night">A real night</a>
+    <a class="link" href="#remember">How it remembers</a>
+    <a class="link" href="#install">Install</a>
+    <a class="cta" id="cta" href="#install">Get it</a>
+  </nav>
+</header>
+
+<aside class="rail" aria-hidden="true" data-tone="dark">
+  <div class="rail__line"><i class="rail__bead"></i></div>
+  <div class="rail__time" title="Seconds into the real run this night replays"><span id="rail-time">00:00</span></div>
+</aside>
+
+<main id="top">
+
+  <!-- Hook: dusk, the sloth asleep on its branch, the screenshots hanging like leaves -->
+  <section class="hero" data-tone="dark">
+    <div class="hero__copy">
+      <h1 class="big" data-hero>Your screenshots, <em>named by morning.</em></h1>
+      <p class="lede" data-hero>A sloth reads them overnight on your own laptop, and Temporal makes sure it finishes, even when something breaks.</p>
+      <div class="install-mini" data-hero>
+        <div class="os" role="tablist" aria-label="Your system" data-os-tabs><i class="bead"></i></div>
+        <div class="cmd"><span class="prompt" aria-hidden="true">›</span><code data-os-cmd></code><button class="copy" type="button" aria-label="Copy the install command" data-copy><svg aria-hidden="true"><use href="#i-copy"/></svg></button></div>
+        <a class="hero__ghost" href="#night">or watch a real night first</a>
+      </div>
+    </div>
+    <div class="hero__stage" aria-hidden="true">
+      <svg class="hero__branch" viewBox="0 0 1440 60" preserveAspectRatio="none" data-branch="hero"></svg>
+      <div class="hang" style="left:12%"><img src="assets/night/shots/03.jpg" alt=""><span>Screenshot 2026-10-19 105126.png</span></div>
+      <div class="hang" style="left:31%; animation-delay:-2s"><img src="assets/night/shots/04.jpg" alt=""><span>Screenshot 2026-10-19 150433.png</span></div>
+      <div class="hang" style="left:80%; animation-delay:-4s"><img src="assets/night/shots/08.jpg" alt=""><span>Screenshot 2026-10-20 225701.png</span></div>
+      <svg class="hero__sloth sloth asleep" viewBox="0 0 200 200" data-sloth></svg>
+    </div>
+    <div class="hero__caps">
+      <span class="cap cue"><i></i>Scroll, slowly</span>
+      <span class="cap" id="live-cap">gemma3:1b · RapidOCR · Temporal · no internet needed</span>
+    </div>
+  </section>
+
+  <!-- Tension: the graveyard of identical names -->
+  <section class="grave" data-tone="dark">
+    <div class="wrap grave__q">
+      <h2 class="mid" data-reveal>Which one was <em>the Wi-Fi password?</em></h2>
+    </div>
+    <div class="grave__rows" aria-hidden="true" data-grave></div>
+    <p class="wrap grave__foot" data-reveal>You took every one of them for a reason, and the file name forgot that reason the moment you pressed the keys.</p>
+  </section>
+
+  <!-- Turn, proof and the storm: one night, replayed from a real Temporal history -->
+  <section class="night" id="night" data-tone="dark">
+    <div class="night__stage">
+      <div class="sky">
+        <i class="moon"></i>
+        <svg class="canopy canopy--top" viewBox="0 0 1440 120" preserveAspectRatio="none" data-canopy="1"></svg>
+        <svg class="canopy canopy--bottom" viewBox="0 0 1440 120" preserveAspectRatio="none" data-canopy="2"></svg>
+      </div>
+      <div class="track" data-track>
+        <svg class="track__branch" data-branch="night" preserveAspectRatio="none"></svg>
+      </div>
+      <svg class="crack" viewBox="0 0 60 80" data-crack><path d="M30 0 L22 22 L36 34 L20 52 L32 64 L26 80" fill="none" stroke="var(--moss-50)" stroke-width="3" stroke-linejoin="round"/></svg>
+      <div class="stage-sloth" data-stage-sloth><svg class="sloth asleep" viewBox="0 0 200 200" data-sloth></svg></div>
+      <div class="stage-sloth" data-stage-sloth2 style="opacity:0"><svg class="sloth" viewBox="0 0 200 200" data-sloth></svg></div>
+
+      <p class="cap stage-cap">A real run, replayed from its Temporal history</p>
+      <div class="ocr" data-ocr><span class="cap">What OCR read</span><span class="txt"></span></div>
+      <ol class="answers" data-answers></ol>
+
+      <div class="counter" data-counter>
+        <div><b data-c="named">0</b><span>named</span></div>
+        <div><b data-c="calls">0</b><span>model calls</span></div>
+        <div><b data-c="kills">0</b><span>crashes</span></div>
+      </div>
+
+      <div class="log" data-log>
+        <div><span class="t">20:19:01</span>  naming   Screenshot 2026-10-20 225701.png  try 1</div>
+        <div class="bad"><span class="t">20:19:08</span>  worker killed (Stop-Process -Force)</div>
+        <div><span class="t">20:19:19</span>  a new worker starts, Temporal replays the history</div>
+        <div class="bad"><span class="t">20:19:26</span>  ActivityTaskStarted  attempt 2  Heartbeat timeout</div>
+        <div><span class="t">20:19:36</span>  → notes/q4-planning-offline-mode-action-items-sync</div>
+      </div>
+
+      <div class="beat" data-beat="wake"><h2 class="mid">When you go to bed, <em>it wakes up.</em></h2></div>
+      <div class="beat" data-beat="read"><h2 class="mid">First it reads the screenshot <em>with an open OCR model,</em></h2></div>
+      <div class="beat" data-beat="name"><h2 class="mid">then asks a 1B model <em>what to call it.</em></h2><p>Gemma 3 1B, running in Ollama, on a laptop with no graphics card.</p></div>
+      <div class="beat" data-beat="wrong"><h2 class="mid">It's slow, <em>and often wrong.</em></h2><p>A name has to use words that are really on the screenshot, so every vague answer fails and Temporal asks again. Five tries in, it gives up and keeps the first words on the screen.</p></div>
+      <div class="beat" data-beat="right"><h2 class="mid">Sometimes the second try <em>is the one.</em></h2></div>
+      <div class="beat" data-beat="storm"><h2 class="mid">Halfway through, <em>I pulled the plug.</em></h2></div>
+      <div class="beat" data-beat="kept"><h2 class="mid">A new sloth climbed back <em>to the same notch.</em></h2><p>Temporal had kept every finished step, so the eight screenshots before it were never read again, and the call that died was retried 18 seconds later, once its heartbeat stopped.</p></div>
+      <div class="beat" data-beat="rest"><h2 class="mid">Ten and a half minutes, <em>nineteen names.</em></h2><p>The drawing with no words on it was left where it was, since there was nothing to read.</p></div>
+    </div>
+  </section>
+
+  <!-- Proof by doing: the real UI, replaying the real plan -->
+  <section class="morning light" id="morning" data-tone="light">
+    <i class="sun" aria-hidden="true"></i>
+    <div class="wrap morning__grid">
+      <div>
+        <h2 class="mid" data-reveal>In the morning, <em>say yes, or say nothing.</em></h2>
+        <p class="lede" data-reveal style="--d:100ms">The plan waits for you. If you're still asleep when the timer runs out, it takes your silence as a yes, and for a whole day after, one click puts every file back.</p>
+        <ul class="say" data-reveal style="--d:200ms">
+          <li><code>nap</code><span>pause between screenshots, nothing is lost</span></li>
+          <li><code>skip 3</code><span>leave one screenshot alone</span></li>
+          <li><code>veto</code><span>move nothing at all</span></li>
+          <li><code>undo</code><span>put everything back, for 24 hours</span></li>
+          <li><code>schedule</code><span>do this every night at 01:30</span></li>
+        </ul>
+      </div>
+      <div class="ui" data-demo>
+        <h3 class="ui__say" data-say>19 screenshots have names. I'll move them in <em>30 minutes</em> unless you stop me.</h3>
+        <p class="ui__sub" data-sub>Saying nothing counts as yes.</p>
+        <div class="ui__acts" data-acts></div>
+        <div class="pile" data-pile></div>
+        <div class="folders" data-folders hidden></div>
+        <div class="live-try">
+          <p>This page is running on your own Slothshot, so you can do it for real.</p>
+          <button class="btn go" type="button" data-live-try>Tidy 20 sample screenshots now</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Depth: the mechanism, as a graph that replays the real history -->
+  <section class="remember" id="remember" data-tone="dark">
+    <div class="wrap">
+      <div class="remember__head">
+        <h2 class="mid" data-reveal>It never forgets, <em>because Temporal writes everything down.</em></h2>
+        <p class="lede" data-reveal style="--d:100ms">The workflow only makes decisions, while the slow and flaky work happens in activities, and the moment one of them finishes, its result goes into the workflow's history, so a new worker can replay the night instead of living through it again.</p>
+      </div>
+      <div class="remember__grid">
+        <div>
+          <div class="graph" data-graph></div>
+          <div class="scrub">
+            <button type="button" data-play>Pause</button>
+            <input type="range" min="0" max="1000" value="0" aria-label="Replay the history" data-scrub>
+            <span class="when" data-when>00:00</span>
+          </div>
+          <div class="events" data-events aria-live="off"></div>
+        </div>
+        <ol class="fails" data-fails></ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust: honest numbers and the open pieces -->
+  <section class="open light" data-tone="light">
+    <div class="wrap">
+      <h2 class="mid" data-reveal>Nothing leaves <em>your laptop.</em></h2>
+      <p class="lede" data-reveal style="--d:100ms">Screenshots are where Wi-Fi passwords, delivery codes and private chats end up, so every piece that reads them runs here, talks only to localhost, and keeps working on a train with no signal.</p>
+      <div class="credits" data-reveal style="--d:160ms">
+        <span>Gemma 3 1B<sup>open weights</sup></span>
+        <span>RapidOCR<sup>Apache 2.0</sup></span>
+        <span>Ollama<sup>MIT</sup></span>
+        <span>Temporal<sup>MIT</sup></span>
+        <span>FastAPI<sup>MIT</sup></span>
+        <span>GSAP<sup>free licence</sup></span>
+      </div>
+      <div class="numbers" data-reveal style="--d:220ms">
+        <div><b>499</b><span>events in the history of the night on this page</span></div>
+        <div><b>66</b><span>model calls to name 19 screenshots</span></div>
+        <div><b>3</b><span>times the worker was killed on purpose</span></div>
+        <div><b>0</b><span>files lost, and every one put back with undo</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Invitation -->
+  <section class="install" id="install" data-tone="dark">
+    <div class="wrap install__grid">
+      <div>
+        <h2 class="mid" data-reveal>Put it to bed <em>tonight.</em></h2>
+        <p class="needs" data-reveal style="--d:100ms">You need <a href="https://ollama.com" rel="noopener">Ollama</a> and about a gigabyte for the model. The installer brings uv, and uv brings its own Python, so there is nothing else to set up.</p>
+      </div>
+      <ol class="steps" data-reveal style="--d:160ms">
+        <li><h3>Install it</h3>
+          <div class="os" role="tablist" aria-label="Your system" data-os-tabs><i class="bead"></i></div>
+          <div class="cmd" style="margin-top:12px"><span class="prompt" aria-hidden="true">›</span><code data-os-cmd></code><button class="copy" type="button" aria-label="Copy the install command" data-copy><svg aria-hidden="true"><use href="#i-copy"/></svg></button></div>
+        </li>
+        <li><h3>Wake it up</h3>
+          <div class="cmd"><span class="prompt" aria-hidden="true">›</span><code>slothshot up</code><button class="copy" type="button" aria-label="Copy" data-copy><svg aria-hidden="true"><use href="#i-copy"/></svg></button></div>
+          <p>It starts Temporal, a worker and this page at localhost:8765, then opens the app.</p>
+        </li>
+        <li><h3>Point it at your Screenshots folder</h3>
+          <p>Or try it on twenty made-up screenshots first, then go to sleep.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+</main>
+
+<footer class="goodbye" data-tone="light">
+  <i class="goodbye__sun" aria-hidden="true"></i>
+  <svg class="goodbye__branch" viewBox="0 0 1440 60" preserveAspectRatio="none" data-branch="footer" aria-hidden="true"></svg>
+  <svg class="goodbye__sloth sloth asleep" viewBox="0 0 200 200" data-sloth aria-hidden="true"></svg>
+  <div class="goodbye__say">
+    <p class="big">Good <em>morning.</em></p>
+    <div class="goodbye__links">
+      <a href="https://github.com/kavyasharma200-tech/slothshot" rel="noopener">The code on GitHub</a>
+      <a href="/app" data-live-only hidden>Open your app</a>
+      <a href="http://localhost:8233" data-live-only hidden>Your Temporal UI</a>
+    </div>
+    <p class="goodbye__fine">Made for the DEV Hacktoberfest Open-Source AI Challenge, week 3: Slow and Steady. The screenshots on this page are made up; the night is a real run.</p>
+  </div>
+</footer>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-mark" viewBox="0 0 32 32">
+    <path d="M3 6.5 C 11 4.5, 21 8, 29 5.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M10.5 7 C 9 11, 9.5 13, 10.5 15 M21.5 7 C 23 11, 22.5 13, 21.5 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="16" cy="19.5" r="9" fill="currentColor"/>
+    <path d="M9.6 19 C 11.6 16.8, 14 17.2, 14.6 19.6 C 13 21.2, 10.8 21.2, 9.6 19 Z M22.4 19 C 20.4 16.8, 18 17.2, 17.4 19.6 C 19 21.2, 21.2 21.2, 22.4 19 Z" fill="var(--page, #16200f)" opacity=".85"/>
+    <path d="M14.4 23.4 q 1.6 1.2 3.2 0" fill="none" stroke="var(--page, #16200f)" stroke-width="1.2" stroke-linecap="round" opacity=".85"/>
+  </symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><path d="M8.5 8.2h9.3a1.7 1.7 0 0 1 1.7 1.7v8.6a1.7 1.7 0 0 1-1.7 1.7H9.4a1.7 1.7 0 0 1-1.7-1.7V9.2M15.4 5.6V5a1.4 1.4 0 0 0-1.4-1.4H6A1.6 1.6 0 0 0 4.4 5.2v8.1A1.4 1.4 0 0 0 5.8 14.7h.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.8l4.1 3.9L19.2 6.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3.6 7.4V17.6a1.6 1.6 0 0 0 1.6 1.6h13.6a1.6 1.6 0 0 0 1.6-1.6V9.5a1.6 1.6 0 0 0-1.6-1.6h-6.6L10.3 5.6H5.2A1.6 1.6 0 0 0 3.6 7.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.5 15.4c1.6-.2 2.6-1.4 2.9-3.2-1.8.1-3 1.1-3.2 2.7" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></symbol>
+</svg>
+
+<script src="assets/vendor/gsap.min.js" defer></script>
+<script src="assets/vendor/scrolltrigger.min.js" defer></script>
+<script src="assets/vendor/lenis.min.js" defer></script>
+<script src="assets/sloth.js?v=1.0.0" defer></script>
+<script src="assets/site.js?v=1.0.0" defer></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+/* Slothshot tokens. One world: a sloth's night in the canopy.
+   Palette drill: 1 jungle green + banana yellow (obvious), 2 forest + sand (polished obvious), 3 Temporal's own
+   black and white (the reference), 4 the sloth's fur: the algae that grows in it (moss), the fur and the tree
+   (bark), the flower it eats (hibiscus), 5 the product itself: white screenshots in a dark room at 2 AM.
+   Picked 4, lit by 5: night is the dark end of the moss ramp, morning the light end, screenshots stay pale cards.
+   Hibiscus is the accent and only marks "now": the current notch, the primary action, the crash. */
+@import url("fonts/fonts.css");
+
+:root {
+  --moss-50: oklch(0.975 0.012 128); --moss-100: oklch(0.945 0.024 128); --moss-200: oklch(0.89 0.045 128);
+  --moss-300: oklch(0.82 0.075 128); --moss-400: oklch(0.72 0.11 128);   --moss-500: oklch(0.62 0.13 128);
+  --moss-600: oklch(0.52 0.12 128);  --moss-700: oklch(0.42 0.095 128);  --moss-800: oklch(0.32 0.065 130);
+  --moss-900: oklch(0.22 0.04 134);  --moss-950: oklch(0.155 0.028 138);
+
+  --bark-50: oklch(0.97 0.012 62);  --bark-100: oklch(0.93 0.02 62);  --bark-200: oklch(0.86 0.035 62);
+  --bark-300: oklch(0.78 0.045 62); --bark-400: oklch(0.69 0.055 62); --bark-500: oklch(0.6 0.06 62);
+  --bark-600: oklch(0.5 0.055 62);  --bark-700: oklch(0.41 0.045 62); --bark-800: oklch(0.32 0.035 62);
+  --bark-900: oklch(0.23 0.025 62);
+
+  --hib-100: oklch(0.94 0.035 12); --hib-300: oklch(0.8 0.11 12); --hib-400: oklch(0.69 0.17 12);
+  --hib-500: oklch(0.6 0.2 12);    --hib-600: oklch(0.5 0.18 12); --hib-700: oklch(0.42 0.15 12);
+
+  --display: "Literata", Georgia, serif;
+  --body: "Atkinson Hyperlegible Next", system-ui, sans-serif;
+  --mono: "Spline Sans Mono", Consolas, monospace;
+
+  /* Motion vocabulary: slow on purpose. */
+  --ease: cubic-bezier(.22, 1, .36, 1);
+  --ease-sheet: cubic-bezier(.76, 0, .24, 1);
+  --ease-jelly: cubic-bezier(.34, 1.56, .64, 1);
+  --slow: cubic-bezier(.3, 0, .15, 1);
+  --t-s: .4s; --t-m: .8s; --t-l: 1.2s;
+
+  --r-control: 12px; --r-card: 20px; --r-panel: 30px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; font: 17px/1.55 var(--body); }
+::selection { background: var(--hib-300); color: var(--moss-950); }
+:focus-visible { outline: 2px solid var(--hib-400); outline-offset: 3px; border-radius: 4px; }
+button { font: inherit; color: inherit; }
+img { max-width: 100%; display: block; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }

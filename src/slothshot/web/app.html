@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slothshot</title>
+<meta name="description" content="Your Slothshot: start a night, watch the sloth work, and see every step Temporal keeps.">
+<link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/tokens.css?v=1.0.0">
+<link rel="stylesheet" href="assets/app.css?v=1.0.0">
+</head>
+<body data-world="day">
+<header class="bar">
+  <a class="mark" href="/" aria-label="Slothshot story"><svg viewBox="0 0 32 32" aria-hidden="true"><use href="#i-mark"/></svg><span>slothshot</span></a>
+  <nav class="tabs" aria-label="Sections">
+    <a href="#/run" data-tab="run">Tonight</a>
+    <a href="#/start" data-tab="start">New night</a>
+    <a href="#/runs" data-tab="runs">Every night</a>
+    <a href="/" >The story</a>
+    <i class="tabs__bead" aria-hidden="true"></i>
+  </nav>
+  <div class="health" data-health aria-live="polite"></div>
+</header>
+
+<main class="wrap">
+  <!-- Start a night -->
+  <section class="view" data-view="start" hidden>
+    <h1 class="mast">Which folder should it <em>tidy tonight?</em></h1>
+    <div class="checks" data-checks></div>
+    <form class="start" data-start>
+      <label class="field">
+        <span class="sr">Folder</span>
+        <svg aria-hidden="true"><use href="#i-folder"/></svg>
+        <input name="folder" placeholder="C:\Users\you\Pictures\Screenshots" autocomplete="off" spellcheck="false" required>
+      </label>
+      <div class="chips" data-chips></div>
+      <div class="opts">
+        <label>Move the files<select name="after">
+          <option value="10">10 minutes after naming</option><option value="60">an hour after naming</option><option value="480" selected>8 hours after naming</option></select></label>
+        <label>Start<select name="night"><option value="">right now</option><option value="01:30">tonight at 01:30</option><option value="03:00">tonight at 03:00</option></select></label>
+        <label>Model<select name="model" data-models><option>gemma3:1b</option></select></label>
+      </div>
+      <button class="go big-go" type="submit" data-submit>Hand it to the sloth</button>
+      <p class="hint">Nothing moves until you say yes, or until the time above passes without a no. For a day after that, one click puts every file back.</p>
+    </form>
+  </section>
+
+  <!-- One night -->
+  <section class="view run" data-view="run" hidden>
+    <div class="run__main">
+      <h1 class="say" data-say>Waking up.</h1>
+      <p class="sub" data-sub></p>
+      <div class="acts" data-acts></div>
+      <div class="branch" aria-hidden="true">
+        <svg class="branch__line" viewBox="0 0 1000 60" preserveAspectRatio="none" data-branch></svg>
+        <div class="branch__knots" data-knots></div>
+        <svg class="branch__sloth sloth" viewBox="0 0 200 200" data-sloth></svg>
+        <span class="branch__count" data-count></span>
+      </div>
+      <ol class="ledger" data-ledger></ol>
+      <div class="empty" data-empty hidden>
+        <svg class="sloth asleep" viewBox="0 0 200 200" data-sloth></svg>
+        <h2>No night yet, <em>the sloth is asleep.</em></h2>
+        <a class="go" href="#/start">Start one</a>
+      </div>
+    </div>
+
+    <aside class="hood" aria-label="Under the hood">
+      <h2 class="hood__title">Under the hood</h2>
+      <div class="card now" data-now>
+        <p class="cap">Right now</p>
+        <div data-pending><p class="quiet">Nothing running.</p></div>
+      </div>
+      <div class="card lab">
+        <p class="cap">Break it on purpose</p>
+        <button class="plug" type="button" data-kill><svg aria-hidden="true"><use href="#i-plug"/></svg><span>Pull the plug on the worker</span></button>
+        <p class="quiet" data-worker>…</p>
+        <label class="flaky">Make the model flaky <output data-chaos-out>0%</output>
+          <input type="range" min="0" max="90" step="10" value="0" data-chaos>
+        </label>
+        <p class="quiet">Each failed call goes back to Temporal, which retries it. Nothing you see here is faked: it kills the real process and fails real calls.</p>
+      </div>
+      <div class="card hist">
+        <p class="cap">The history Temporal keeps <a data-tui target="_blank" rel="noopener">open in Temporal ↗</a></p>
+        <ol class="events" data-events></ol>
+      </div>
+    </aside>
+  </section>
+
+  <!-- Every night -->
+  <section class="view" data-view="runs" hidden>
+    <h1 class="mast">Every <em>night.</em></h1>
+    <ol class="runs" data-runs></ol>
+  </section>
+</main>
+<div class="toast" data-toast role="status"></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-mark" viewBox="0 0 32 32">
+    <path d="M3 6.5 C 11 4.5, 21 8, 29 5.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M10.5 7 C 9 11, 9.5 13, 10.5 15 M21.5 7 C 23 11, 22.5 13, 21.5 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="16" cy="19.5" r="9" fill="currentColor"/>
+    <path d="M9.6 19 C 11.6 16.8, 14 17.2, 14.6 19.6 C 13 21.2, 10.8 21.2, 9.6 19 Z M22.4 19 C 20.4 16.8, 18 17.2, 17.4 19.6 C 19 21.2, 21.2 21.2, 22.4 19 Z" fill="var(--bg)" opacity=".9"/>
+  </symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3.6 7.4V17.6a1.6 1.6 0 0 0 1.6 1.6h13.6a1.6 1.6 0 0 0 1.6-1.6V9.5a1.6 1.6 0 0 0-1.6-1.6h-6.6L10.3 5.6H5.2A1.6 1.6 0 0 0 3.6 7.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.5 15.4c1.6-.2 2.6-1.4 2.9-3.2-1.8.1-3 1.1-3.2 2.7" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></symbol>
+  <symbol id="i-plug" viewBox="0 0 24 24"><path d="M8.6 3.8v4.1M15.4 3.8v4.1M6.4 7.9h11.2v2.6a5.6 5.6 0 0 1-11.2 0Z M12 16.1v2.3c0 1.3-.9 2.1-2.2 2.1" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.4 14.6l1.6-1M19.6 18l1.8.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+</svg>
+<script src="assets/sloth.js?v=1.0.0" defer></script>
+<script src="assets/app.js?v=1.0.0" defer></script>
+</body>
+</html>
