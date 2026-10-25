@@ -2,7 +2,7 @@
 title: "Slothshot: a tiny model on a slow laptop names my screenshots overnight, and Temporal makes sure it finishes"
 published: false
 tags: devchallenge, hf26challenge, temporal, opensource
-cover_image: https://raw.githubusercontent.com/kavyasharma200-tech/slothshot/main/docs/cover.jpg
+cover_image: https://raw.githubusercontent.com/kavyasharma200-tech/slothshot/main/docs/cover-art.jpg
 ---
 
 *This is a submission for the [Hacktoberfest Open-Source AI Challenge Week 3: Slow and Steady](https://dev.to/challenges/hacktoberfest-week3-2026-10-19)*
